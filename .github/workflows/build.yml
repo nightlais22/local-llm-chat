@@ -16,7 +16,7 @@ jobs:
           java-version: '17'
 
       - name: Unzip project
-        run: unzip -o "local-llm-chat.zip" -d work
+        run: unzip -o "23.zip" -d work
 
       - name: Setup Gradle wrapper
         working-directory: work
