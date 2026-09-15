@@ -16,7 +16,7 @@ jobs:
           java-version: '17'
 
       - name: Unzip project
-        run: unzip -o "12.zip" -d work
+        run: unzip -o "Новый.zip" -d work
 
       - name: Setup Gradle wrapper
         working-directory: work
