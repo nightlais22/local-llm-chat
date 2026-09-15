@@ -18,7 +18,7 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
 
       - name: Unzip project
-        run: unzip -o "local-llm-chat(1).zip" -d project
+        run: unzip -o "local-llm-chat.zip" -d project
 
       - name: List files
         run: |
