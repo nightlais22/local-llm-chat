@@ -1,19 +1,23 @@
-name: Build Debug APK
+name: Unpack project
 on:
-  push:
   workflow_dispatch:
+permissions:
+  contents: write
 jobs:
-  build:
+  unpack:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: 17
-      - uses: gradle/actions/setup-gradle@v4
-      - run: gradle assembleDebug --stacktrace
-      - uses: actions/upload-artifact@v4
-        with:
-          name: app-debug
-          path: app/build/outputs/apk/debug/app-debug.apk
+      - name: Unzip
+        run: |
+          unzip -o 'local-llm-chat(1).zip' -d /tmp/proj
+          cp -r /tmp/proj/local-llm-chat/. .
+          rm -f 'local-llm-chat(1).zip'
+      - name: Commit
+        run: |
+          git config user.name "nightlais22"
+          git config user.email "nightlais22@users.noreply.github.com"
+          git checkout -- .github/workflows/
+          git add -A
+          git commit -m "unpack project" || echo "nothing to commit"
+          git push
