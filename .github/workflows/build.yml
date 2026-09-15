@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Unzip
         run: |
-          unzip -o 'local-llm-chat(1).zip' -d /tmp/proj
+          unzip -o 'local-llm-chat.zip' -d /tmp/proj
           cp -r /tmp/proj/local-llm-chat/. .
           rm -f 'local-llm-chat(1).zip'
       - name: Commit
