@@ -1,43 +1,19 @@
 name: Build Debug APK
-
 on:
   push:
   workflow_dispatch:
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - uses: actions/setup-java@v5
+      - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '17'
-
+          java-version: 17
       - uses: gradle/actions/setup-gradle@v4
-
-      - name: Unzip project
-        run: unzip -o "local-llm-chat.zip" -d project
-
-      - name: List files
-        run: |
-          echo "=== project ==="
-          ls -la project
-          echo "=== project/* ==="
-          ls -la project/*
-
-      - name: Find gradlew
-        run: find project -name "gradlew" -type f
-
-      - name: Build APK
-        run: |
-          cd $(find project -name "gradlew" -type f -exec dirname {} \; | head -1)
-          chmod +x gradlew
-          ./gradlew assembleDebug --stacktrace
-
+      - run: gradle assembleDebug --stacktrace
       - uses: actions/upload-artifact@v4
         with:
           name: app-debug
-          path: |
-            **/app-debug.apk
+          path: app/build/outputs/apk/debug/app-debug.apk
