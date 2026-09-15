@@ -16,27 +16,21 @@ jobs:
           java-version: '17'
 
       - name: Unzip project
-        run: |
-          unzip -o "local-llm-chat.zip" -d work
-          if [ -d "work/local-llm-chat/local-llm-chat" ]; then
-            mv work/local-llm-chat/local-llm-chat work/project
-          else
-            mv work/local-llm-chat work/project
-          fi
+        run: unzip -o "local-llm-chat.zip" -d work
 
       - name: Setup Gradle wrapper
-        working-directory: work/project
+        working-directory: work
         run: gradle wrapper --gradle-version 8.7
 
       - name: Make gradlew executable
-        working-directory: work/project
+        working-directory: work
         run: chmod +x gradlew
 
       - name: Build APK
-        working-directory: work/project
+        working-directory: work
         run: ./gradlew assembleDebug --stacktrace
 
       - uses: actions/upload-artifact@v4
         with:
           name: app-debug
-          path: work/project/**/app-debug.apk
+          path: work/**/app-debug.apk
