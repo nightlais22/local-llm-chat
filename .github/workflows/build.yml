@@ -11,8 +11,8 @@ jobs:
       - name: Unzip
         run: |
           unzip -o 'local-llm-chat.zip' -d /tmp/proj
-          cp -r /tmp/proj/local-llm-chat/. .
-          rm -f 'local-llm-chat(1).zip'
+          cp -r /tmp/proj/local-llm-chat/local-llm-chat/ . .
+          rm -f 'local-llm-chat/local-llm-chat.zip'
       - name: Commit
         run: |
           git config user.name "nightlais22"
