@@ -16,7 +16,7 @@ jobs:
           java-version: '17'
 
       - name: Unzip project
-        run: unzip -o "Чкжое.zip" -d work
+        run: unzip -o "Чужое3.zip" -d work
 
       - name: Setup Gradle wrapper
         working-directory: work
@@ -25,6 +25,12 @@ jobs:
       - name: Make gradlew executable
         working-directory: work
         run: chmod +x gradlew
+
+      - name: Download ai-core AAR
+        working-directory: work
+        run: |
+          mkdir -p app/libs
+          curl -L -o app/libs/ai-core-release.aar "https://github.com/Siddhesh2377/Ai-Core/releases/download/v0.1/ai-core-release.aar"
 
       - name: Build APK
         working-directory: work
